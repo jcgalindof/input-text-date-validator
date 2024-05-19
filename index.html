@@ -142,8 +142,14 @@
               return $('#birth_date').val(newBirthday);
             }
           };
+          $.validator.addMethod("customDateLength",
+            function (value, element) {
+              return value.split("/") === 3;
+            },
+            "<div class='regular_required_mesg'>Date is incomplete</div>"
+          );
           $.validator.addMethod("customBirthday",
-            function(value, element) {
+            function (value, element) {
               // get current date to calculate age
               var currentDay = new Date();
               // set the months that have 31 days
@@ -220,6 +226,7 @@
             {
               'input_birth_date': {
                 required: true,
+                customDateLength: true,
                 customBirthday: true
               },
               'first_name': {

@@ -130,15 +130,9 @@
           });
           function fixDate(){
             var writtenBirthday = $('#input_birth_date').val();
-            // check the value the user wrote
-            // console.log(writtenBirthday);
             var parts = writtenBirthday.split("/");
-            // check if the date is written with its 3 parts
-            //console.log(parts.length);
             if (parts.length === 3) {
               var newBirthday = parts[1] + "/" + parts[0] + "/" + parts[2];
-              // check if your date is passing correctly
-              // console.log('fixed Birthdate for SFMC' + newBirthday);
               return $('#birth_date').val(newBirthday);
             }
           };
@@ -156,7 +150,7 @@
           );
           $.validator.addMethod("customMonthNumber",
             function( value, element ) {
-              return value.split("/")[1] <= 12;
+              return value.split("/")[1] <= 12 && value.split("/")[1] <= 1;
             },
             "<div class='regular_required_mesg'>Month is not valid.</div>"
           );
@@ -177,7 +171,7 @@
                 default:
                   maxDay = 30;
               }
-              return (value.split("/")[0] ) <= maxDay;
+              return (value.split("/")[0] ) <= maxDay && value.split("/")[0] <= 1;
             },
             "<div class='regular_required_mesg'>Day is not valid for the selected month.</div>"
           );
